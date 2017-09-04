@@ -1,77 +1,94 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "mylibrary.h"
 #define lim 100
 
 
 
-typedef struct {
-	REGISTRO itens[lim]		
-	int topo;
-}PILHA;
-
-typedef struct{
-	
-	int codigo;
-	char descricao[30];
-	
-}REGISTRO;
-
-void inicializarPilha(PILHA *tPilha){
-	(*pPilha).topo = -1;
-	
-}
-
-void empilhar(PILHA *pPilha , REGISTRO pReg){
-	int novo;
-	
-	*pPilha.topo++;
-	novo = (*pPilha).topo;
-	*pPilha.itens[novo] =pReg;
-}
 
 
-void VisualizarPilha(TPILHA pPilha)
+
+main()
 {
-     int i;
-     REGISTRO a;
-     
-     printf(" \n Pilha \n");
-     for(i=pPilha.topo; i>=0; i--)
-     {
-         a = pPilha.itens[i];
-         printf("\n Cod  : %d \n", a.chave);                  
-         printf(" Desc : %s \n", a.descricao);                  
-     }   
-     printf(" \n ------- \n ");
-}
+    REGISTRO aux;
+    TPILHA p1, p2;
+    int op;
 
+    InicializarPilha(&p1);
+    InicializarPilha(&p2);
 
-main(){
- 
- REGISTRO aux;
-    TPILHA p1;
-
-    inicializarPilha(&p1);
-
-    aux.chave = 10;
-    strcpy(aux.descricao, "Teclado");
-    Empilhar(&p1, aux);
-
-    aux.chave = 15;
-    strcpy(aux.descricao, "Mouse");
-    empilhar(&p1, aux);
-
-    aux.chave = 19;
-    strcpy(aux.descricao, "Monitor");
-    empilhar(&p1, aux);
-
-    aux.chave = 21;
-    strcpy(aux.descricao, "Gabinete");
-    empilhar(&p1, aux);
-
-    VisualizarPilha(p1);
+    do{
+         printf(" Menu \n");
+         printf(" (1) Empilhar em P1 \n");
+         printf(" (2) Empilhar em P2 \n");
+         printf(" (3) Desempilhar de P1 \n");
+         printf(" (4) Desempilhar de P2 \n");
+         printf(" (5) Tranferir de P1 -> P2 \n");
+         printf(" (6) Tranferir de P2 -> P1 \n");
+         printf(" (7) Visualizar     \n");
+         printf(" Opcao : ");
+         scanf("%d", &op);
+         
+         switch(op)
+         {
+            case 1:
+                 {
+                     printf(" Digite codigo: ");
+                     scanf("%d", &aux.chave);                  
+                     printf(" Digite descricao: ");
+                     scanf("%s", &aux.descricao);                  
+                 
+                     Empilhar(&p1, aux);                 
+                 }break;          
+            case 2:
+                 {
+                     printf(" Digite codigo: ");
+                     scanf("%d", &aux.chave);                  
+                     printf(" Digite descricao: ");
+                     scanf("%s", &aux.descricao);                  
+                 
+                     Empilhar(&p2, aux);                 
+                 }break;          
+            case 3:
+                 {
+                     aux = Desempilhar(&p1);                 
+                     printf(" \n %d Desempilhado.\n ", aux.chave); 
+                 }break;          
+            case 4:
+                 {
+                     aux = Desempilhar(&p2);                 
+                     printf(" \n %d Desempilhado.\n ", aux.chave); 
+                 }break;          
+            case 5:
+                 {
+                   if ( (!PilhaVazia(p1)) && (!PilhaCheia(p2)) )
+                   { aux = Desempilhar(&p1);                 
+                     Empilhar(&p2, aux);                 
+                   }
+                   else
+                   { printf(" Impossivel movimentar."); }
+                 }break;          
+            case 6:
+                 {
+                   if ( (!PilhaVazia(p2)) && (!PilhaCheia(p1)) )
+                   {
+                     aux = Desempilhar(&p2);                 
+                     Empilhar(&p1, aux);                 
+                   }
+                   else
+                   { printf(" Impossivel movimentar."); }
+                 }break;          
+            case 7:                   
+                 {
+                     VisualizarPilha(p1);               
+                     VisualizarPilha(p2);               
+                 }          
+         }
+         
+         system("pause");                          
+         system("cls");                          
+    }while (op != 9);
 
     system("pause");
-}
 }
 
