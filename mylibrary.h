@@ -31,6 +31,29 @@ void Empilhar(TPILHA *pPilha, REGISTRO pReg)
      (*pPilha).itens[novo] = pReg;
 }
 
+REGISTRO Desempilhar(TPILHA *pPilha)
+{
+     REGISTRO aux;
+     int t;
+     
+     t = (*pPilha).topo;
+     aux = (*pPilha).itens[t];
+     
+     (*pPilha).topo--;     
+     
+     return aux;
+}
+
+int PilhaVazia(TPILHA pPilha)
+{
+    return (pPilha.topo == -1);   
+}
+
+int PilhaCheia(TPILHA pPilha)
+{
+    return (pPilha.topo == (lim-1));   
+}
+
 void VisualizarPilha(TPILHA pPilha)
 {
      int i;
@@ -45,18 +68,5 @@ void VisualizarPilha(TPILHA pPilha)
      }   
      printf(" \n ------- \n ");
 }
-
-
-REGISTRO Desempilhar(TPILHA *tPilha){
-	REGISTRO aux;
-	int t;
-	
-	t= (*tPilha).topo;
-	aux = (*tPilha).itens[t];
-	(*tPilha).topo --;
-	
-	return aux;
-}
-
 
 #endif
